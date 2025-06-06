@@ -1,0 +1,35 @@
+{
+  "name": "listine",
+  "version": "1.0.0",
+  "author": {
+    "name": "Harsh Gupta",
+    "url": "https://github.com/hrssh11"
+  },
+  "description": "Angular virtual scroll component supporting variable item heights.",
+  "keywords": [
+    "angular",
+    "virtual-scroll",
+    "variable-height",
+    "scrolling",
+    "virtual-list",
+    "listine",
+    "performance",
+    "infinite-scroll",
+    "angular-component"
+  ],
+  "scripts": {
+    "start": "ng serve"
+  },
+  "peerDependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hrssh11/listine.git"
+  },
+  "sideEffects": false
+}

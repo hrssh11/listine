@@ -1,0 +1,18 @@
+.scroll-container {
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
+  background: #fff;
+}
+
+.total-height {
+  position: relative;
+  width: 100%;
+}
+
+.item {
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  will-change: transform;
+}

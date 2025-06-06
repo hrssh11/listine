@@ -1,0 +1,20 @@
+<div
+  #scroller
+  class="scroll-container"
+  (scroll)="onScroll()"
+  [style.height.px]="viewportHeight"
+>
+  <div class="total-height" [style.height.px]="totalContentHeight">
+    <ng-container *ngFor="let item of visibleItems; let i = index">
+      <div
+        #itemElement
+        class="item"
+        [style.transform]="'translateY(' + getItemTop(visibleStart + i) + 'px)'"
+      >
+        <ng-container
+          *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"
+        ></ng-container>
+      </div>
+    </ng-container>
+  </div>
+</div>

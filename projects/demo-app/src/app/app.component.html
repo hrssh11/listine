@@ -1,0 +1,12 @@
+<div class="listine-item-continer">
+  <listine-variable-virtual-scroll
+    [items]="COLLECTION_MODES"
+    [buffer]="10"
+    [viewportHeight]="600"
+    [itemTemplate]="itemTemplate"
+  >
+    <ng-template #itemTemplate let-option let-i="index">
+      <p>{{ option.label }} (ID: {{ option.value }})</p>
+    </ng-template>
+  </listine-variable-virtual-scroll>
+</div>
