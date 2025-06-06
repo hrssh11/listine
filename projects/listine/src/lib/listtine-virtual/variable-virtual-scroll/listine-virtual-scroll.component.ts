@@ -43,7 +43,7 @@ import { CommonModule } from "@angular/common";
   styleUrls: ["./listine-virtual-scroll.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListineVirtualScrollComponent
+export class ListineVirtualScrollModule
   implements OnInit, AfterViewInit, OnChanges, OnDestroy
 {
   /** List of all items to render */

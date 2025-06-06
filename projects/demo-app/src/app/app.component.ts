@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ListineVirtualScrollComponent } from "../../../listine/src/public-api";
+import { ListineVirtualScrollModule } from "../../../listine/src/public-api";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [CommonModule, ListineVirtualScrollComponent],
+  imports: [CommonModule, ListineVirtualScrollModule],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.scss",
 })

@@ -36,7 +36,26 @@ Install listine with npm
 ```
 
 ## Example
+```bash
 
+import { ListineVirtualScrollModule } from "/listine";
+
+   <listine-variable-virtual-scroll
+    [items]="options"
+    [buffer]="10"
+    [viewportHeight]="600"
+    [itemTemplate]="itemTemplate"
+  >
+    <ng-template #itemTemplate let-option let-i="index">
+      <p>{{ option.label }} (ID: {{ option.value }})</p>
+    </ng-template>
+  </listine-variable-virtual-scroll>
+  
+```
+
+## Note
+
+In some cases if parent element have display flex than virtual scroll will not work 
 
 ## Authors
 
