@@ -58,11 +58,17 @@ export class ListineVirtualScrollModule
   /** Template reference for rendering each item */
   @Input() itemTemplate: TemplateRef<any>;
 
+  /** Flag to track if panel is open */
+  @Input() panelOpen: boolean = false;
+
   /** Initial estimated height of each item before actual measurement */
   @Input() initialItemHeight = 50;
 
   /** Emits scroll position whenever user scrolls */
   @Output() scrollEmitter = new EventEmitter<any>();
+
+  /** Emits when user scrolls to the end of the list */
+  @Output() scrollToEnd = new EventEmitter<void>();
 
   /** Reference to the scrolling container */
   @ViewChild("scroller", { static: true }) scrollerRef!: ElementRef;
@@ -96,12 +102,14 @@ export class ListineVirtualScrollModule
     });
   });
 
+  /** Previous scroll position to detect actual scrolling */
+  private previousScrollTop = 0;
+
   constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
 
   /** Initialize item heights on component initialization */
   ngOnInit(): void {
     this.initializeHeights();
-    console.log("items ", this.items);
   }
 
   /**
@@ -117,6 +125,10 @@ export class ListineVirtualScrollModule
         this.calculateHeights();
         this.onScroll();
       });
+    }
+    if (changes["panelOpen"] && changes["panelOpen"]?.currentValue) {
+      this.panelOpen = changes["panelOpen"]?.currentValue;
+      this.onScroll();
     }
   }
 
@@ -184,13 +196,21 @@ export class ListineVirtualScrollModule
     while (end < this.items.length && this.getItemTop(end) < viewportBottom) {
       end++;
     }
-
     this.visibleStart = Math.max(0, start - this.buffer);
     this.visibleEnd = Math.min(this.items.length, end + this.buffer);
-    this.measureItemHeights();
     this.updateVisibleItems();
-
     this.scrollEmitter.emit(scrollTop);
+
+    // Check if scrolled to the end
+    const scrollHeight = this.scrollerRef.nativeElement.scrollHeight;
+    const clientHeight = this.scrollerRef.nativeElement.clientHeight;
+    const isAtEnd = scrollTop + clientHeight >= scrollHeight - 1;
+
+    if (isAtEnd && scrollTop > this.previousScrollTop && scrollTop > 0) {
+      this.scrollToEnd.emit();
+    }
+
+    this.previousScrollTop = scrollTop;
   }
 
   /** Updates the list of items to be rendered based on scroll position */

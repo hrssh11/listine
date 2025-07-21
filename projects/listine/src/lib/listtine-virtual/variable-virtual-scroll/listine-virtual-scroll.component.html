@@ -4,7 +4,10 @@
   (scroll)="onScroll()"
   [style.height.px]="viewportHeight"
 >
-  <div class="total-height" [style.height.px]="totalContentHeight">
+  <div
+    class="total-height"
+    [style.height.px]="totalContentHeight - viewportHeight"
+  >
     <ng-container *ngFor="let item of visibleItems; let i = index">
       <div
         #itemElement
